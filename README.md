@@ -1,69 +1,60 @@
-# nuxt-pwa-offline-first
+# Nuxt PWA
 
-## Build Setup
+The aim of this project is to learn how to work with Nuxt as a PWA and take advantage of service workers to create native-like, cross device applications that can be used offline.
 
-```bash
-# install dependencies
-$ npm install
+Nuxt has a first-party module for this that uses Workbox and also handles much of the configuration.
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+## Project Plan Overview
 
-# build for production and launch server
-$ npm run build
-$ npm run start
+Create a four page app that has an `error page`, `list one`, `list two` and a `dynamic page` to show an individual item.
 
-# generate static project
-$ npm run generate
-```
+- All HTML, CSS and JS files to be saved and loaded from the cache
+- Content to be saved and loaded from the cache into the store
+- The app to attempt to get updated data on initial load and update the state if any changes
+- Post requests to be queued if offline to execute once there is a network
 
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
+## Research Tasks
 
-## Special Directories
+- Setting up and configuring a Nuxt PWA project
+- Understanding how to interact with workbox and the patterns used integrate workbox and vuex
 
-You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
+## Build Tasks
 
-### `assets`
+- [x] Create `PWA`, `static` to be hosted on Netlify, add `Vuetify` and `axios`
+- [] Add `mdi` to project (if not already available in Vuetify)
+- [x] Layouts: `default` & `empty`
+- [x] **Error page**:
+  - Empty layout
+  - Error layout/page
+- [] **ListOne page**:
+  - `AddPost` component
+  - `List` component
+- [] **ListTwo page**:
+  - `AddPost` component
+  - `List` component
+- [] **SingleItem page**:
 
-The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
+### Redirects
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
+- [] **Middleware** to redirect from the `home` page to `ListOne` as there is no home page.
 
-### `components`
+### Store modules
 
-The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
+- [] `ListOne` (state = `tasks`)
+- [] `ListTwo` (state = `tasks`)
+- [] Initial load of data from `nuxtServerInit`
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
+### Workflows
 
-### `layouts`
+- [] **GET**: List of Tasks
+- [] **GET**: Single Task
+- [] **POST**: New Task
+- [] **PATCH**: Update Task
 
-Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
+### Plugins
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
+- [] Refactor `get` and `use` logic into a `requests.js` plugin to extract asynchronous code out of the store.
 
+### Adding PWA Provisions
 
-### `pages`
-
-This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/get-started/routing).
-
-### `plugins`
-
-The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
-
-### `static`
-
-This directory contains your static files. Each file inside this directory is mapped to `/`.
-
-Example: `/static/robots.txt` is mapped as `/robots.txt`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
-
-### `store`
-
-This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+- []
