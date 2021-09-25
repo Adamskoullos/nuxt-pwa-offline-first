@@ -5,7 +5,7 @@
       <h2 class="error-page text-center font-weight-regular mb-9">
         Page not found
       </h2>
-      <v-btn :to="{ name: 'listOne' }">Take me home</v-btn>
+      <v-btn :to="{ name: 'list-one' }">Take me home</v-btn>
     </v-col>
   </v-row>
 </template>

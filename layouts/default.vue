@@ -2,9 +2,7 @@
   <v-app light>
     <Navbar />>
     <v-main>
-      <v-container id="main-container" fill-height class="">
-        <Nuxt />
-      </v-container>
+      <Nuxt />
     </v-main>
   </v-app>
 </template>
@@ -22,7 +20,21 @@ export default {};
   ) !important;
 }
 
-#main-container {
+/* Custom classes to be used globally, should be in custom scss file  */
+.main-container {
   overflow: auto;
+}
+
+.max-width {
+  width: 90%;
+  max-width: 900px;
+}
+
+span.material-icons-outlined {
+  font-family: "Material Icons Outlined" !important;
+}
+
+span.material-icons {
+  font-family: "Material Icons" !important;
 }
 </style>

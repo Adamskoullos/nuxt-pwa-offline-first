@@ -16,7 +16,7 @@ Create a four page app that has an `error page`, `list one`, `list two` and a `d
 ## Research Tasks
 
 - Setting up and configuring a Nuxt PWA project
-- Understanding how to interact with workbox and the patterns used integrate workbox and vuex
+- Understanding how to interact with workbox and the patterns used to integrate workbox and vuex
 
 ## Build Tasks
 
@@ -32,11 +32,11 @@ Create a four page app that has an `error page`, `list one`, `list two` and a `d
 - [] **ListTwo page**:
   - `AddPost` component
   - `List` component
-- [] **SingleItem page**:
+- [] Single dynamic page for each list page
 
 ### Redirects
 
-- [] **Middleware** to redirect from the `home` page to `ListOne` as there is no home page.
+- [x] **Middleware** to redirect from the `home` page to `ListOne` as there is no home page.
 
 ### Store modules
 

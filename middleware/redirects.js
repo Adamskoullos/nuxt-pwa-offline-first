@@ -1,15 +1,15 @@
-export default ({ route, redirect }) => {
+export default ({ route, redirect, req, res }) => {
   if (process.server) {
-    if (route.path == "/") {
-      console.log(route.path);
-      return redirect("/listOne");
+    // For larger projects server logic could be placed in specific serverMiddleware that only runs on the server to improve performance
+    if (req.url == "/") {
+      res.writeHead(301, { Location: "/list-one" });
+      res.end();
     }
   }
 
   if (process.client) {
-    if (route.name == "index") {
-      console.log(route.name);
-      redirect("listOne");
+    if (route.path == "/") {
+      redirect("list-one");
     }
   }
 };
