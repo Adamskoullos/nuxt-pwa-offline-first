@@ -37,6 +37,9 @@ export default {
 
 <style lang="scss">
 .container-add-task {
+  h3 {
+    color: rgba(58, 58, 58, 0.753);
+  }
   .input-div {
     input {
       flex: 1 1;

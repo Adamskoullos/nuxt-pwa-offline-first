@@ -37,4 +37,11 @@ span.material-icons-outlined {
 span.material-icons {
   font-family: "Material Icons" !important;
 }
+
+h1.title.text-center {
+  color: rgba(58, 58, 58, 0.753);
+  font-size: 2.5rem !important;
+  font-weight: 300;
+  margin: 20px auto;
+}
 </style>

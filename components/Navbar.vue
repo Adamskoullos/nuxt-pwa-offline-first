@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar fixed app class="primary">
+  <v-app-bar fixed app class="secondary">
     <v-toolbar-title v-text="title" />
     <v-spacer />
     <v-toolbar-items>

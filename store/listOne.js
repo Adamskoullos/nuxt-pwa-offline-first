@@ -32,177 +32,78 @@ export const actions = {
     ctx.commit("setIsLoading", true);
     ctx.commit("setError", "");
     try {
-      const res = await axios.get(
-        "https://dev-test-api-one.herokuapp.com/todos"
-      );
-      ctx.commit("setTodosData", res.data);
+      const endpoint = "one";
+      const todos = await this.$getAllTodos(endpoint);
+      ctx.commit("setTodosData", todos);
       ctx.commit("setIsLoading", false);
     } catch (error) {
-      console.log(error.message);
-      if (error.request) {
-        // Code to run...
-        console.log(error.request);
-      } else if (error.response) {
-        // Code to run...
-        console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.statusText);
-        console.log(error.response.headers);
-        console.log(error.toJSON);
-      } else {
-        // Code to run...
-        console.log(error.toJSON);
-      }
+      this.$errorLogger(error);
       ctx.commit("setError", "Sorry, unable to fetch todo list at this time");
       ctx.commit("setIsLoading", false);
     }
   },
-  async fetchUpdatedTodoAndUpdateState(ctx, todo) {
-    try {
-      const res = await axios(
-        "https://dev-test-api-one.herokuapp.com/todos/" + todo.id
-      );
+  // ====================================================================================
 
-      const newArr = ctx.state.todos.map(todo => {
-        if (todo.id == res.data.id) {
-          return res.data;
-        }
-        return todo;
-      });
-      ctx.commit("setTodosData", newArr);
-    } catch (error) {
-      console.log(error.message);
-      if (error.request) {
-        // Code to run...
-        console.log(error.request);
-      } else if (error.response) {
-        // Code to run...
-        console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.statusText);
-        console.log(error.response.headers);
-        console.log(error.toJSON);
-      } else {
-        // Code to run...
-        console.log(error.toJSON);
-      }
-      ctx.commit("setError", "Unable to access the data base at this time");
-    }
-  },
-  async toggleComplete(ctx, todo) {
-    try {
-      await axios.patch(
-        "https://dev-test-api-one.herokuapp.com/todos/" + todo.id,
-        {
-          complete: !todo.complete
-        }
-      );
-      ctx.dispatch("fetchUpdatedTodoAndUpdateState", todo);
-    } catch (error) {
-      console.log(error.message);
-      if (error.request) {
-        // Code to run...
-        console.log(error.request);
-      } else if (error.response) {
-        // Code to run...
-        console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.statusText);
-        console.log(error.response.headers);
-        console.log(error.toJSON);
-      } else {
-        // Code to run...
-        console.log(error.toJSON);
-      }
-      ctx.commit("setError", "Unable to access the data base at this time");
-    }
-  },
   async addTodo(ctx, newTodo) {
     try {
-      await axios.post("https://dev-test-api-one.herokuapp.com/todos", newTodo);
-      const res = await axios(
-        "https://dev-test-api-one.herokuapp.com/todos/" + newTodo.id
-      );
-      const newArr = [...ctx.state.todos, res.data];
+      const todos = ctx.state.todos;
+      const endpoint = "one";
+      const newArr = await this.$postNewTodo(todos, newTodo, endpoint);
       ctx.commit("setTodosData", newArr);
     } catch (error) {
-      console.log(error.message);
-      if (error.request) {
-        // Code to run...
-        console.log(error.request);
-      } else if (error.response) {
-        // Code to run...
-        console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.statusText);
-        console.log(error.response.headers);
-        console.log(error.toJSON);
-      } else {
-        // Code to run...
-        console.log(error.toJSON);
-      }
+      this.$errorLogger(error);
       ctx.commit("setError", "Unable to access the data base at this time");
     }
   },
+
+  // =======================================================================================
+
   async deleteTodo(ctx, todo) {
     try {
-      await axios.delete(
-        "https://dev-test-api-one.herokuapp.com/todos/" + todo.id
-      );
-
-      const newArr = ctx.state.todos.filter(task => task.id != todo.id);
+      const todos = ctx.state.todos;
+      const endpoint = "one";
+      const newArr = await this.$removeTodo(todos, todo, endpoint);
       ctx.commit("setTodosData", newArr);
     } catch (error) {
-      console.log(error.message);
-      if (error.request) {
-        // Code to run...
-        console.log(error.request);
-      } else if (error.response) {
-        // Code to run...
-        console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.statusText);
-        console.log(error.response.headers);
-        console.log(error.toJSON);
-      } else {
-        // Code to run...
-        console.log(error.toJSON);
-      }
+      this.$errorLogger(error);
     }
   },
+
+  // ======================================================================================
+
   updateTodo(ctx, newArr) {
     ctx.commit("setTodosData", newArr);
   },
-  async updateTodoText(ctx, data) {
-    console.log(data.text);
+
+  // =======================================================================================
+
+  async toggleComplete(ctx, todo) {
     try {
-      await axios.patch(
-        "https://dev-test-api-one.herokuapp.com/todos/" + data.todo.id,
-        {
-          update: !data.todo.update,
-          text: data.text,
-          complete: false
-        }
-      );
-      ctx.dispatch("fetchUpdatedTodoAndUpdateState", data.todo);
+      const todos = ctx.state.todos;
+      const endpoint = "one";
+      const newArr = await this.$toggleTick(todos, todo, endpoint);
+      ctx.commit("setTodosData", newArr);
     } catch (error) {
-      console.log(error.message);
-      if (error.request) {
-        // Code to run...
-        console.log(error.request);
-      } else if (error.response) {
-        // Code to run...
-        console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.statusText);
-        console.log(error.response.headers);
-        console.log(error.toJSON);
-      } else {
-        // Code to run...
-        console.log(error.toJSON);
-      }
+      this.$errorLogger(error);
+      ctx.commit("setError", "Unable to access the data base at this time");
     }
   },
+
+  // =======================================================================================
+
+  async updateTodoText(ctx, data) {
+    try {
+      const todos = ctx.state.todos;
+      const endpoint = "one";
+      const newArr = await this.$patchUpdatedTask(todos, data, endpoint);
+      ctx.commit("setTodosData", newArr);
+    } catch (error) {
+      this.$errorLogger(error);
+    }
+  },
+
+  // =======================================================================================
+
   filterTodoList(ctx, input) {
     ctx.commit("setFilter", input);
   }

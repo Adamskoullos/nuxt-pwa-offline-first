@@ -160,7 +160,7 @@ div.error {
       input {
         flex: 1 1;
         margin-right: 5px;
-        border: 2px solid #ecf0f3;
+        border: 2px solid #ecf0f391;
       }
       .edit-buttons {
         display: flex;
@@ -182,7 +182,7 @@ div.error {
       flex: 1;
       margin: 10px 10px 10px 0;
       padding: 8px;
-      background: #ecf0f3;
+      background: #ecf0f391;
       font-weight: 400;
       font-size: 18px;
       line-height: 30px;

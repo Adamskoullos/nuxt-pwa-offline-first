@@ -1,6 +1,6 @@
 <template>
   <v-container class="main-container justify-center align-start">
-    <h1 class="text-center display-1">List One</h1>
+    <h1 class="title text-center">List One</h1>
     <AddTask :module="'listOne'" />
     <FilterTabs :module="'listOne'" :filter="filter" />
     <TaskList
