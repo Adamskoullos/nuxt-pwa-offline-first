@@ -64,7 +64,25 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: "en"
+      lang: "en",
+      display: "standalone"
+    },
+    workbox: {
+      runtimeCaching: [
+        {
+          urlPattern: "https://dev-test-api-one.herokuapp.com/todos",
+          handler: "cacheFirst",
+          method: "GET",
+          strategyOptions: { cacheableResponse: { statuses: [0, 200] } }
+        },
+        {
+          urlPattern: "https://dev-test-api-two.herokuapp.com/todos",
+          handler: "cacheFirst",
+          method: "GET",
+          strategyOptions: { cacheableResponse: { statuses: [0, 200] } }
+        }
+      ],
+      cachingExtensions: "@/plugins/workbox-sync.js"
     }
   },
 

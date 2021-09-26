@@ -12,7 +12,7 @@ export default ({ $axios }, inject) => {
 
   const removeTodo = async (todos, todo, endpoint) => {
     await $axios.delete(
-      `https://dev-test-api-${endpoint}.herokuapp.com/todos/` + todo.id
+      `https://dev-test-api-${endpoint}.herokuapp.com/todos/${todo.id}`
     );
 
     const newArr = [...todos].filter(task => task.id != todo.id);
@@ -24,7 +24,7 @@ export default ({ $axios }, inject) => {
 
   const patchUpdatedTask = async (todos, data, endpoint) => {
     const res = await $axios.patch(
-      `https://dev-test-api-${endpoint}.herokuapp.com/todos/` + data.todo.id,
+      `https://dev-test-api-${endpoint}.herokuapp.com/todos/${data.todo.id}`,
       {
         update: !data.todo.update,
         text: data.text,
@@ -45,7 +45,7 @@ export default ({ $axios }, inject) => {
 
   const toggleTick = async (todos, todo, endpoint) => {
     const res = await $axios.patch(
-      `https://dev-test-api-${endpoint}.herokuapp.com/todos/` + todo.id,
+      `https://dev-test-api-${endpoint}.herokuapp.com/todos/${todo.id}`,
       {
         complete: !todo.complete
       }

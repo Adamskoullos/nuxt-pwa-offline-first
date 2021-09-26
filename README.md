@@ -66,4 +66,75 @@ Refactor `use` and `get` logic from **actions** into plugins to be reused in eac
 
 ### Adding PWA Provisions
 
-- []
+**Please note**: All of the below is just me trying some things out and may or may not be best practice.
+
+- [x] Add: `display: 'standalone'` so the app can be opened in it's own window
+- [x] Add endpoints to be cached and handle strategies to workbox object within the pwa object in `nuxt.config.js`
+- [x] create workbox plugin so workbox registers post routes so offline requests can be queued and executed when back online:
+
+```js
+const bgSyncPlugin = new workbox.backgroundSync.BackgroundSyncPlugin(
+  "formQueue",
+  {
+    maxRetentionTime: 24 * 60 // Retry for max of 24 Hours (specified in minutes)
+  }
+);
+
+workbox.routing.registerRoute(
+  /https:\/\/dev\-test\-api\-one\.herokuapp\.com\/todos/,
+  // /https:\/\/jsonplaceholder\.typicode\.com\/posts/,
+  new workbox.strategies.NetworkOnly({
+    plugins: [bgSyncPlugin]
+  }),
+  "POST"
+);
+
+workbox.routing.registerRoute(
+  /https:\/\/dev\-test\-api\-two\.herokuapp\.com\/todos/,
+  new workbox.strategies.NetworkOnly({
+    plugins: [bgSyncPlugin]
+  }),
+  "POST"
+);
+```
+
+- [x] Add config so workbox knows about the above plugin. Here is the total pwa config so far:
+
+```js
+pwa: {
+    manifest: {
+      lang: "en",
+      display: "standalone"
+    },
+    workbox: {
+      runtimeCaching: [
+        {
+          urlPattern: "https://dev-test-api-one.herokuapp.com/todos/",
+          handler: "cacheFirst",
+          method: "GET",
+          strategyOptions: { cacheableResponse: { statuses: [0, 200] } }
+        },
+        {
+          urlPattern: "https://dev-test-api-two.herokuapp.com/todos/",
+          handler: "cacheFirst",
+          method: "GET",
+          strategyOptions: { cacheableResponse: { statuses: [0, 200] } }
+        }
+      ],
+      cachingExtensions: "@/plugins/workbox-sync.js"
+    }
+  },
+
+```
+
+## Deployment
+
+Deployed as a `static` site on Netlify:
+
+First generate the build locally to test the production build:
+
+I had some issues here with server side middlware running `req.url` which was un defined and breaking the build. I switched to `route.path` all good.
+
+1. Confirm in `nuxt.config.js`: **target: static**
+2. `npm run generate` creates the `dist` folder
+3. `npm run start`
