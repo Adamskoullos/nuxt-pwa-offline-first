@@ -133,7 +133,7 @@ Deployed as a `static` site on Netlify:
 
 First generate the build locally to test the production build:
 
-I had some issues here with server side middlware running `req.url` which was un defined and breaking the build. I switched to `route.path` all good.
+I had some issues here with server side middleware running `req.url` which was undefined and breaking the build. I switched to `route.path` all good.
 
 1. Confirm in `nuxt.config.js`: **target: static**
 2. `npm run generate` creates the `dist` folder
