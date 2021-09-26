@@ -69,20 +69,20 @@ export default {
     },
     workbox: {
       runtimeCaching: [
-        {
-          urlPattern: "https://dev-test-api-one.herokuapp.com/todos",
-          handler: "cacheFirst",
-          method: "GET",
-          strategyOptions: { cacheableResponse: { statuses: [0, 200] } }
-        },
-        {
-          urlPattern: "https://dev-test-api-two.herokuapp.com/todos",
-          handler: "cacheFirst",
-          method: "GET",
-          strategyOptions: { cacheableResponse: { statuses: [0, 200] } }
-        }
-      ],
-      cachingExtensions: "@/plugins/workbox-sync.js"
+        //   {
+        //     urlPattern: "https://dev-test-api-one.herokuapp.com/todos",
+        //     handler: "cacheFirst",
+        //     method: "GET",
+        //     strategyOptions: { cacheableResponse: { statuses: [0, 200] } }
+        //   },
+        //   {
+        //     urlPattern: "https://dev-test-api-two.herokuapp.com/todos",
+        //     handler: "cacheFirst",
+        //     method: "GET",
+        //     strategyOptions: { cacheableResponse: { statuses: [0, 200] } }
+        //   }
+      ]
+      // cachingExtensions: "@/plugins/workbox-sync.js"
     }
   },
 
