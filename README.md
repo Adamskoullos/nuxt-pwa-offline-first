@@ -2,25 +2,21 @@
 ![pwa2](https://user-images.githubusercontent.com/73107656/134801997-f3a2d4df-ecc2-4fa0-96f1-fa0c72a56b1d.png)
 ![pwa3](https://user-images.githubusercontent.com/73107656/134802000-24dba743-c1ec-446c-a0d0-c4f9a2bdb170.png)
 
-# Nuxt PWA
+# Nuxt PWA | [Live Link](https://nuxt-pwa-todo.netlify.app/)
 
-The aim of this project is to learn how to work with Nuxt as a PWA and take advantage of service workers to create native-like, cross device applications that can be used offline.
+Mini project to play with Nuxt and the PWA module and see how workbox is integrated into a Nuxt project.
 
-Nuxt has a first-party module for this that uses Workbox and also handles much of the configuration.
+## Overview
 
-## Project Plan Overview
+A five page app that includes:
 
-Create a five page app that has an `error page`, `list one`, `list one dynamic page`, `list two` and `list two dynamic page`.
-
-- All HTML, CSS and JS files to be saved and loaded from the cache
-- Content to be saved and loaded from the cache into the store
-- The app to attempt to get updated data on initial load and update the state if any changes
-- Post requests to be queued if offline to execute once there is a network
-
-## Research Tasks
-
-- Setting up and configuring a Nuxt PWA project
-- Understanding how to interact with workbox and the patterns used to integrate workbox and vuex
+- Error page with separate layout
+- Two different todo endpoints each with there own store module, page and dynamic page
+- Reusable components, AddTask, FilterTabs, TaskList
+- Reusable plugin functions extracting request logic out of actions to keep modules cleaner and easier to navigate
+- Reusable error plugin function to help with debugging
+- Basic middleware that has separate logic for both server and client, just to redirect from home page
+- Some use of Vuetify
 
 ## Build Tasks
 
@@ -133,8 +129,14 @@ Deployed as a `static` site on Netlify:
 
 First generate the build locally to test the production build:
 
-I had some issues here with server side middleware running `req.url` which was undefined and breaking the build. I switched to `route.path` all good.
+I had some issues here with server side middleware running code that was undefined. I simplified this and all good.
 
 1. Confirm in `nuxt.config.js`: **target: static**
 2. `npm run generate` creates the `dist` folder
 3. `npm run start`
+
+There were again some issues generating with Netlify, but these were ironed out.
+
+I did however run into a bigger problem once workbox registered domains to cache data from. Once activated, for some reason the domains break....I think this is something to do with the domain regex when registering. This results in the endpoints being wrong and unreachable giving a 404. I am still working this out.
+
+The live site can be used and can operate as a standalone application: [Live Link](https://nuxt-pwa-todo.netlify.app/)
