@@ -36,7 +36,6 @@ export default {};
 .loader {
   height: 400px;
   margin: 3px auto;
-  padding: 10px;
   max-width: 900px;
 
   .holder {

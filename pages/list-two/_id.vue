@@ -1,6 +1,7 @@
 <template>
   <v-row class="fill-height">
     <v-col class="d-flex flex-column justify-center align-center">
+      <v-btn :to="{ name: 'list-two' }" class="mb-15">Back</v-btn>
       <h1 class="display-1">
         <span class="white--text">Task: </span>{{ todo.text }}
       </h1>

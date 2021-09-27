@@ -62,6 +62,7 @@
         <Loader />
       </div>
       <!-- If there is an issue fetching data this message will show to let the user know -->
+      <!-- This is a good candidate for a component, but in this app it is only used in TaskList -->
       <div v-if="error" class="error">
         <h1>{{ error }}</h1>
       </div>
@@ -78,12 +79,14 @@ export default {
     };
   },
   methods: {
+    // This toggles the todo checkbox
     handleComplete(todo) {
       this.$store.dispatch(this.module + "/toggleComplete", todo);
     },
     handleDelete(todo) {
       this.$store.dispatch(this.module + "/deleteTodo", todo);
     },
+    // The busy code here was a solution to the two way data binding of the v-model attempting to mutate state as the user edits the input field
     handleUpdate(todo) {
       this.text = todo.text;
       const newArr = [];
@@ -98,6 +101,7 @@ export default {
       });
       this.$store.dispatch(this.module + "/updateTodo", newArr);
     },
+    // The user clicks the above to show the input, the input value is set to the todo.text then once the user edits, they click the below to save
     handleUpdateText(todo) {
       const data = {
         todo: todo,
@@ -115,6 +119,7 @@ div.error {
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #81e597 !important;
   h1 {
     margin: auto;
     font-size: 30px;
@@ -126,11 +131,9 @@ div.error {
   margin: auto;
 
   .task {
-    //   background: gray;
     display: flex;
     align-items: center;
     justify-content: stretch;
-    // margin: 10px;
 
     a {
       flex: 1;

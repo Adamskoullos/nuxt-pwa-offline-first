@@ -7,7 +7,7 @@ export const mutations = {};
 //   Actions >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 export const actions = {
-  nuxtServerInit({ dispatch }, { req }) {
+  nuxtServerInit({ dispatch }) {
     dispatch("listOne/fetchTodo");
     dispatch("listTwo/fetchTodo");
   }
