@@ -140,3 +140,9 @@ There were again some issues generating with Netlify, but these were ironed out.
 I did however run into a bigger problem once workbox registered domains to cache data from. Once activated, for some reason the domains break....I think this is something to do with the domain regex when registering. This results in the endpoints being wrong and unreachable giving a 404. I am still working this out.
 
 The live site can be used and can operate as a standalone application: [Live Link](https://nuxt-pwa-todo.netlify.app/)
+
+Bugs:
+
+1. The above domain issue with workbox
+2. Need to handle a page reload if the user is on a dynamic page
+3. In production when the page is initially loaded a forward slash is being added to the end of the url, this is breaking the internal link if the user goes straight to a dynamic page before hitting a navbar link
