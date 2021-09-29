@@ -256,16 +256,18 @@ div.error {
 @media (min-width: 200px) and (max-width: 499px) {
   .task-list .task {
     flex-wrap: wrap;
-    p {
+    min-width: 300px;
+    a {
+      margin: auto;
       flex: 1 1;
-      min-width: 250px;
+      min-width: 300px;
     }
   }
   form {
     flex-wrap: wrap;
     input {
       flex: 1;
-      min-width: 250px;
+      min-width: 300px;
     }
     .edit-buttons {
       margin: auto;
@@ -283,6 +285,13 @@ div.error {
   }
   .todo-actions {
     margin: auto;
+    display: flex;
+    justify-content: center;
+    min-width: 300px;
+    margin-bottom: 20px;
+    span.material-icons {
+      margin: 5px 20px;
+    }
   }
 }
 </style>
